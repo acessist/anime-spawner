@@ -1,0 +1,14 @@
+/work/
+/outputs/
+/data/
+/app/
+/runtime/
+*.class
+*.jar
+*.exe
+*.zip
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
