@@ -71,6 +71,3 @@ docs/                  Screenshot and release notes
 
 The interface takes inspiration from [Anima Engine](https://store.steampowered.com/app/3474900/Anima_Engine/). This is an independent implementation. APNG composition follows the [W3C PNG specification](https://www.w3.org/TR/png-3/).
 
-## License
-
-MIT. Packaged OpenJDK runtime licenses are included under `runtime/legal/`. Imported media retains its owner's rights.
