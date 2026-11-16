@@ -35,4 +35,4 @@ Closing the manager leaves the app in the system tray when available. Use the tr
 - WAV, AIFF and AU sounds on spawn.
 - Optional video and WebP conversion using a separately installed FFmpeg executable.
 
-FFmpeg conversion takes the first eight seconds at 15 fps and 320-pixel width. Set its executable path in Configuration.
+FFmpeg conversion takes the first eight seconds at 15 fps and 320-pixel width. Set its executable path in Configuration. Inspired from Anima Engine
