@@ -6,6 +6,8 @@ Extract the ZIP and run **Anime Spawner.exe**.
 
 Import your own GIFs and images and place them on your Windows desktop. Anime Spawner uses transparent, draggable windows with controls for size, playback speed, opacity and mirroring.
 
+**Inspired from Anima Engine**
+
 ## Run
 
 For a packaged build, extract the ZIP and open **Anime Spawner.exe**. Keep the `app` and `runtime` folders beside it.
@@ -35,4 +37,4 @@ Closing the manager leaves the app in the system tray when available. Use the tr
 - WAV, AIFF and AU sounds on spawn.
 - Optional video and WebP conversion using a separately installed FFmpeg executable.
 
-FFmpeg conversion takes the first eight seconds at 15 fps and 320-pixel width. Set its executable path in Configuration. Inspired from Anima Engine
+FFmpeg conversion takes the first eight seconds at 15 fps and 320-pixel width. Set its executable path in Configuration.
