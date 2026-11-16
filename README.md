@@ -6,7 +6,7 @@ Extract the ZIP and run **Anime Spawner.exe**.
 
 Import your own GIFs and images and place them on your Windows desktop. Anime Spawner uses transparent, draggable windows with controls for size, playback speed, opacity and mirroring.
 
-**Inspired from Anima Engine**
+Inspired from **Anima Engine**
 
 ## Run
 
