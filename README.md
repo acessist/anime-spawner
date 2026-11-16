@@ -2,17 +2,15 @@
 
 **[Download for Windows x64](https://github.com/acessist/anime-spawner/releases/latest/download/AnimeSpawner-1.1.0-Windows-x64.zip)** · [Release notes](https://github.com/acessist/anime-spawner/releases/latest)
 
-Extract the ZIP and run **Anime Spawner.exe**. Java is included; no installation is needed.
+Extract the ZIP and run **Anime Spawner.exe**.
 
 Import your own GIFs and images and place them on your Windows desktop. Anime Spawner uses transparent, draggable windows with controls for size, playback speed, opacity and mirroring.
-
-The library starts empty. No characters, animation packs or sample media are bundled.
 
 ![Empty animation library](docs/screenshot.png)
 
 ## Run
 
-For a packaged build, extract the ZIP and open **Anime Spawner.exe**. Keep the `app` and `runtime` folders beside it. The runtime is included; no separate Java installation is needed.
+For a packaged build, extract the ZIP and open **Anime Spawner.exe**. Keep the `app` and `runtime` folders beside it.
 
 To run from source, install JDK 21+ and use:
 
