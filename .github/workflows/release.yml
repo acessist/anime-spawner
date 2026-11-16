@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [.github/workflows/release.yml]
+    paths: [.github/workflows/release.yml, README.md]
 permissions:
   contents: write
 concurrency:
@@ -37,18 +37,7 @@ jobs:
           Compress-Archive -LiteralPath 'work/packages/Anime Spawner' -DestinationPath AnimeSpawner-1.1.0-Windows-x64.zip
           $hash = (Get-FileHash AnimeSpawner-1.1.0-Windows-x64.zip -Algorithm SHA256).Hash.ToLower()
           "$hash  AnimeSpawner-1.1.0-Windows-x64.zip" | Set-Content SHA256SUMS.txt -Encoding ascii
-          @'
-          ## Anime Spawner 1.1.0
-          Download **AnimeSpawner-1.1.0-Windows-x64.zip** below, extract it, and open **Anime Spawner.exe**.
-          Keep the app and runtime folders beside the executable. Java is included.
-          
-          - Empty library: import your own GIF, APNG or image.
-          - Delete unwanted imports without deleting the original files.
-          - Transparent desktop animations, resizing, mirroring and saved scenes.
-          
-          Requires Windows 10/11 x64. This portable build does not use an installer.
-          The source-code archives are for developers; use the Windows ZIP to run the app.
-          '@ | Set-Content release-notes.md -Encoding utf8
+          [IO.File]::WriteAllText("release-notes.md", "")
       - name: Publish release
         shell: pwsh
         env:
@@ -57,6 +46,24 @@ jobs:
           RELEASE_COMMIT: ${{ github.sha }}
         run: |
           gh release view v1.1.0 --json tagName 2>$null
-          if ($LASTEXITCODE -eq 0) { throw 'Release v1.1.0 already exists; refusing to replace it.' }
-          gh release create v1.1.0 AnimeSpawner-1.1.0-Windows-x64.zip SHA256SUMS.txt --target $env:RELEASE_COMMIT --title 'Anime Spawner 1.1.0' --notes-file release-notes.md --latest
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload v1.1.0 AnimeSpawner-1.1.0-Windows-x64.zip SHA256SUMS.txt --clobber
+            if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
+            gh release edit v1.1.0 --notes-file release-notes.md
+          } else {
+            gh release create v1.1.0 AnimeSpawner-1.1.0-Windows-x64.zip SHA256SUMS.txt --target $env:RELEASE_COMMIT --title 'Anime Spawner 1.1.0' --notes-file release-notes.md --latest
+          }
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }
+      - name: Verify published README
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release download v1.1.0 --pattern AnimeSpawner-1.1.0-Windows-x64.zip --dir work/verify
+          if ($LASTEXITCODE -ne 0) { throw 'Download verification failed' }
+          Expand-Archive work/verify/AnimeSpawner-1.1.0-Windows-x64.zip work/verify/extracted
+          $expected = (Get-FileHash README.md -Algorithm SHA256).Hash
+          $actual = (Get-FileHash 'work/verify/extracted/Anime Spawner/README.md' -Algorithm SHA256).Hash
+          if ($expected -ne $actual) { throw 'Published README differs from repository README' }
+          Write-Output "Published README matches repository: $actual"
